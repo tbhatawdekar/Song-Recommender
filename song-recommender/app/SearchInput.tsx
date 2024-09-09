@@ -1,14 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const SearchInput = () => {
     const [searchQuery, setSearchQuery] = useState("");
+    const router = useRouter();
 
     const onSearch = (event: React.FormEvent) => {
         event.preventDefault();
-        console.log("current query", searchQuery);
+        const encodedSearchQuery = encodeURI(searchQuery);
+
+        router.push(`/search?q=${encodedSearchQuery}`);
+        console.log("current query", encodedSearchQuery);
     };
 
     return (

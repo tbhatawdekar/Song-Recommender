@@ -28,7 +28,7 @@ export default function SongRecommender() {
             Search
           </Button> */}
         </div>
-        <Results /> 
+        {/* <Results />  */}
       </div>
     </div>
   )
