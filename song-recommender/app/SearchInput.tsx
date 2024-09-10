@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 const SearchInput = () => {
     const [searchQuery, setSearchQuery] = useState("");
+    const [choices, setChoices] = useState([]);
     const router = useRouter();
 
     const onSearch = (event: React.FormEvent) => {
@@ -42,10 +43,17 @@ const SearchInput = () => {
                             someData: true,
                         })
                     });
-                    console.log("RESPONSE", response);
+                    const result = await response.json();
+                    setChoices(result.choices);
                 }}>
                     API
                 </Button>
+                {choices.map((choice : any) => {
+                    console.log(choice)
+                    return(
+                        <p style={{ color: 'black', fontSize: '1.5rem', marginBottom: '1rem' }} key={choice.index}>{choice.message.content}</p>
+                    )
+                })}
             </div>
         </div>
     );

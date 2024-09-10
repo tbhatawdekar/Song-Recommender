@@ -19,7 +19,7 @@ export default async function handler(
                     },
                     {
                         role: "user",
-                        content: "I just got an A on my test!"
+                        content: "I'm going to my least favorite city, San Francisco, tomorrow."
                     }
                 ],
                 temperature: 0,
