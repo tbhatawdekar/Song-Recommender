@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "@/lib/prisma";  // Assuming prisma.ts exports `prisma`
+import { prisma } from "@/lib/prisma";  
 
 export default async function handler (
     req: NextApiRequest,
@@ -7,11 +7,14 @@ export default async function handler (
 ) {
     if (req.method === "GET") {
         try {
-            const { q: query } = req.query;
-            const genre = typeof query === 'string' ? query : ''; 
+            const { emotion } = req.query;
+            const genreFilter = typeof emotion === 'string' ? emotion : '';
+
             const songs = await prisma.songs.findMany({
                 where: {
-                    genre: genre
+                    genre: {
+                        equals: genreFilter,
+                    }
                 }
             });
             res.status(200).json({ songs: songs });

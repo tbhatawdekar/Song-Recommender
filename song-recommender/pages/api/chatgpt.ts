@@ -9,6 +9,8 @@ export default async function handler(
             const openai = new OpenAI({
                 apiKey: process.env.OPENAI_API_KEY
             });
+            
+            const { prompt } = req.body;
 
             const response = await openai.chat.completions.create({
                 model: "gpt-3.5-turbo",
@@ -19,10 +21,10 @@ export default async function handler(
                     },
                     {
                         role: "user",
-                        content: "I'm going to my least favorite city, San Francisco, tomorrow."
+                        content: prompt
                     }
                 ],
-                temperature: 0,
+                temperature: 1,
                 max_tokens: 10,
                 top_p: 1,
                 frequency_penalty: 0,

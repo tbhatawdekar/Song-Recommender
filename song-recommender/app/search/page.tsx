@@ -18,11 +18,15 @@ const fetchSongs = async (url: string) => {
 
 const SearchPage = () => {
     const search = useSearchParams();
-    const searchQuery = search ? search.get('q') : null;    
+    const searchQuery = search ? search.get('q') : null; 
+    const emotion = search ? search.get('emotion') : null;  
     const encodedSearchQuery = encodeURI(searchQuery || "");
-    const { data, isLoading, error } = useSWR(`/api/search?q=${encodedSearchQuery}`, fetchSongs);
+    const encodedEmotion = encodeURI(emotion || "");
 
-    if (isLoading) return <div>Loading...</div>;
+    const { data, error } = useSWR(() => `/api/search?q=${encodedSearchQuery}&emotion=${encodedEmotion}`, fetchSongs);
+    // const { data, isLoading, error } = useSWR(`/api/search?q=${encodedSearchQuery}`, fetchSongs);
+
+    if (!data) return <div>Loading...</div>;
     if (!data?.songs) {
         return <div>No songs found.</div>;
     }
