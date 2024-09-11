@@ -17,7 +17,7 @@ export default async function handler(
                 messages: [
                     {
                         role: "system",
-                        content: "Categorize the text into one of the four categories: happy, sad, anger, fear. Only respond with the category name in all lowercase."
+                        content: "Categorize the text into one of the five categories: happy, sad, angry, fear, and tender. Only respond with the category name in all lowercase."
                     },
                     {
                         role: "user",
